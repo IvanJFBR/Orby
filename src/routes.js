@@ -1,15 +1,86 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Home } from './pages/home'
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { getHeaderTitle } from "@react-navigation/elements";
+
+import { Ionicons } from "@expo/vector-icons";
+import { COLORS } from "./assets/colors";
+import { SCREENS } from "./sreens";
+import { Header } from "./components/orby_default_header/header";
 
 const Tab = createBottomTabNavigator();
 
-export function Routes(){
-    return(
-        <Tab.Navigator>
-            <Tab.Screen
-                name="home"
-                component={Home}
-            />
-        </Tab.Navigator>
-    )
+export function OrbyTabs() {
+  let tabs = [
+    SCREENS.home,
+    SCREENS.form,
+    SCREENS.ranking,
+    SCREENS.map,
+    SCREENS.profile,
+  ];
+
+  return (
+    <Tab.Navigator>
+      {tabs.map((data) => {
+        return (
+          <Tab.Screen
+            key={data.name}
+            name={data.name}
+            component={data.component}
+            options={{
+              tabBarShowLabel: false,
+              headerShown: false,
+              tabBarIcon: ({ focused, size }) => {
+                if (focused) {
+                  return (
+                    <Ionicons
+                      size={size}
+                      color={COLORS.primary}
+                      name={data.icon}
+                    />
+                  );
+                }
+
+                return (
+                  <Ionicons
+                    size={size}
+                    color={COLORS.primary}
+                    name={data.outlinedIcon}
+                  />
+                );
+              },
+            }}
+          />
+        );
+      })}
+    </Tab.Navigator>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+export function OrbyInitialStack() {
+  return (
+    <Stack.Navigator initialRouteName="news">
+      <Stack.Screen
+        key={SCREENS.news.name}
+        name={SCREENS.news.name}
+        component={SCREENS.news.component}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        key={SCREENS.login.name}
+        name={SCREENS.login.name}
+        component={SCREENS.login.component}
+        options={{
+          animationEnabled: false,
+          header: ({ navigation, route, options, back }) => {
+            const title = getHeaderTitle(options, route.name);
+
+            return <Header leftButton={navigation.goBack} />;
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
 }
