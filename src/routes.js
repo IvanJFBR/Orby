@@ -73,10 +73,7 @@ export function OrbyInitialStack() {
         name={SCREENS.login.name}
         component={SCREENS.login.component}
         options={{
-          animationEnabled: false,
-          header: ({ navigation, route, options, back }) => {
-            const title = getHeaderTitle(options, route.name);
-
+          header: ({ navigation }) => {
             return <Header leftButton={navigation.goBack} />;
           },
         }}

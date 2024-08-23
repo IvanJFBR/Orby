@@ -1,11 +1,18 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { OrbyInitialStack } from "./src/routes";
-import { Login } from "./src/pages/login";
-import { News } from "./src/pages/news/news";
+import { COLORS } from "./src/assets/colors";
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: COLORS.white,
+  },
+};
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <OrbyInitialStack />
     </NavigationContainer>
   );

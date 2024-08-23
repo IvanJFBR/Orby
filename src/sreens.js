@@ -1,10 +1,11 @@
 import { Home } from "./pages/home";
+import { Login } from "./pages/login/login";
 import { News } from "./pages/news/news";
 
 export const SCREENS = {
   login: {
     name: "login",
-    component: Home,
+    component: Login,
     icon: null,
     outlinedIcon: null,
   },

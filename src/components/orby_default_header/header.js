@@ -3,27 +3,33 @@ import React from "react";
 
 import { COLORS } from "../../assets/colors";
 import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export function Header(prop) {
   return (
-    <View style={styles.header}>
-      <TouchableOpacity style={styles.header} onPress={prop.leftButton}>
-        <Ionicons
-          size={40}
-          color={COLORS.primary}
-          name="chevron-back"
-          style={styles.header_left_button}
-        />
-      </TouchableOpacity>
+    <SafeAreaView style={styles.header}>
+      {prop.leftButton != null ? (
+        <TouchableOpacity onPress={prop.leftButton}>
+          <Ionicons
+            size={40}
+            color={COLORS.primary}
+            name="chevron-back"
+            style={styles.header_left_button}
+          />
+        </TouchableOpacity>
+      ) : null}
+
       <Text style={styles.header_text}>{prop.title}</Text>
-    </View>
+
+      {prop.rightButton != null ? prop.rightButton : null}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
-    marginTop: 15,
+    justifyContent: "space-between",
   },
   header_left_button: {
     marginStart: 2,
