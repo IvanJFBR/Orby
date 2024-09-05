@@ -6,7 +6,7 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: COLORS.primary,
+    background: COLORS.white,
   },
 };
 
