@@ -1,6 +1,6 @@
 FROM node:latest
 
-WORKDIR /api
+WORKDIR /node-api
 
 COPY . .
 
